@@ -1,0 +1,9 @@
+<label *ngIf="data.type === 'info'"><mat-icon>check_circle_outline</mat-icon></label>
+<label *ngIf="data.type === 'warning'"><mat-icon>report_problem</mat-icon></label>
+<label *ngIf="data.type === 'error'"><mat-icon>report_problem</mat-icon></label>
+<label *ngIf="data.type === 'info'" class="message">
+  {{data.message}}
+</label>
+<label *ngIf="data.type !== 'info'" class="message">
+  {{data.message}}
+</label>

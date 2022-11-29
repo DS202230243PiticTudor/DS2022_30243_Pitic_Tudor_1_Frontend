@@ -1,0 +1,68 @@
+<div>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h1>
+    Update {{this.userUpdate.firstName}} {{this.userUpdate.lastName}}
+  </h1>
+  <h4>
+    With id: {{this.userUpdate.id}}
+  </h4>
+  <form [formGroup]="form" (ngSubmit)="updateUser()">
+    <p>
+      <mat-form-field>
+        <input type="text" matInput placeholder="First Name" formControlName="firstName">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Last Name" formControlName="lastName">
+      </mat-form-field>
+    </p>
+    <p>
+      Current Email: {{this.userUpdate.email}}
+    </p>
+    <p>
+      <mat-form-field>
+        <input type="email" matInput placeholder="Email" formControlName="newEmail">
+      </mat-form-field>
+    </p>
+    <p>
+      Current Username: {{this.userUpdate.username}}
+    </p>
+    <p>
+      <mat-form-field>
+        <input type="text" matInput placeholder="New Username" formControlName="newUsername">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of this.roles" [value]="role">{{role}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Active</mat-label>
+        <mat-select formControlName="active">
+          <mat-option [value]="true">True</mat-option>
+          <mat-option [value]="false">False</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Not Locked</mat-label>
+        <mat-select formControlName="notLocked">
+          <mat-option [value]="true">True</mat-option>
+          <mat-option [value]="false">False</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <div class="button">
+      <button style="width: 120px" type="submit" disabled="{{form.invalid}}" mat-raised-button>Submit</button>
+    </div>
+  </form>
+</div>

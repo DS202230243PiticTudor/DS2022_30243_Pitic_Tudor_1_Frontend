@@ -1,0 +1,37 @@
+.toolbar-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-element {
+  margin-right: 30px;
+}
+
+button{
+  width: 150px;
+  height: 70%;
+}
+
+.right-elements {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar {
+  /* Center the content */
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  /* Colors */
+  background-color: #d1d5db;
+  color: #fff;
+
+  /* Rounded border */
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+}

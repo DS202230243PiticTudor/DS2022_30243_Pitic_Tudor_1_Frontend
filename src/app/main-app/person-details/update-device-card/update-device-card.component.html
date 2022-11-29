@@ -1,0 +1,31 @@
+<div>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h1>
+    Update Device at address {{this.deviceUpdate.address}}
+  </h1>
+  <h4>
+    With id: {{this.deviceUpdate.id}}
+  </h4>
+  <form [formGroup]="form" (ngSubmit)="updateDevice()">
+    <p>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Address" formControlName="address">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <textarea type="text" matInput placeholder="Description" formControlName="description"></textarea>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input type="number" matInput placeholder="Max Energy Consumption" formControlName="maxEnergyConsumption">
+      </mat-form-field>
+    </p>
+    <div class="button">
+      <button style="width: 120px" type="submit" disabled="{{form.invalid}}" mat-raised-button>Submit</button>
+    </div>
+  </form>
+</div>

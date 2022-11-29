@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="mat-elevation-z4">
+  <div class="toolbar-content">
+    Energy Management App
+    <div class="right-elements">
+      <button class="right-element" mat-flat-button color="primary" (click)="logout()">Logout</button>
+      <span class="avatar">{{getAvatarInitials()}}</span>
+    </div>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>

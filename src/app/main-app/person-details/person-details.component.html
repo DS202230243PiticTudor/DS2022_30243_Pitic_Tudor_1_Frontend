@@ -1,0 +1,21 @@
+<div>
+  <mat-toolbar color="white" class="mat-elevation-z4">
+    <div class="toolbar-container">
+      <div class="details-left-elements">
+        <button mat-icon-button class="elements" (click)="clickBack()">
+          <mat-icon color="primary">arrow_back_ios_new</mat-icon>
+        </button>
+        <span class="elements" *ngIf="person != undefined">{{this.person.firstName}} {{this.person.lastName}}</span>
+      </div>
+      <div class="details-right-elements">
+        <button mat-button [class]="btnDevicesStyle" (click)="onClickDevicesButton()">Devices</button>
+        <button mat-button [class]="btnStatsStyle" (click)="onClickStatsButton()">Stats</button>
+      </div>
+    </div>
+  </mat-toolbar>
+</div>
+<div class="content-wrapper">
+  <div class="content-container mat-elevation-z4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

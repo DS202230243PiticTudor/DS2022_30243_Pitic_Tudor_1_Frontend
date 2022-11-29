@@ -1,0 +1,77 @@
+.add-device-button {
+  width: 125px;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  max-height: 89%;
+}
+
+.mat-table {
+  min-width: 100%;
+}
+
+.mat-header-row {
+  background-color: #8e99d7;
+  border-bottom: 1px solid #070813;
+}
+
+.mat-header-cell {
+  font-weight: 500;
+  color: #fff;
+  border-bottom: 2px solid #3c4caa;
+}
+
+.mat-row:nth-child(n) {
+  background-color: #ffffff;
+}
+
+.mat-row:not(:nth-child(2n+1)) {
+  background-color: #eceef8;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid #ccd5ff;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: #d9ddf2;
+  border-bottom: 1px solid #3c4caa;
+}
+
+.buttons-container{
+  display: flex;
+  justify-content: right;
+  margin-right: 1%;
+  margin-bottom: 30px;
+}
+
+.delete-icon {
+  color:red;
+}
+
+.edit-icon {
+  color: #6877ca;
+}
+
+.dim-card {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  min-width: 300px;
+  max-width: 300px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.device-card-wrapper {
+  display: flex;
+  flex-flow: wrap;
+  //flex-wrap: wrap;
+}
