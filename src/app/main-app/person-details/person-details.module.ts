@@ -15,7 +15,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
-
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,15 @@ import {MatListModule} from "@angular/material/list";
     MatInputModule,
     MatDialogModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    NgxEchartsModule.forRoot({
+      /**
+       * This will import all modules from echarts.
+       * If you only need custom modules,
+       * please refer to [Custom Build] section.
+       */
+      echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+    }),
   ]
 })
 export class PersonDetailsModule { }

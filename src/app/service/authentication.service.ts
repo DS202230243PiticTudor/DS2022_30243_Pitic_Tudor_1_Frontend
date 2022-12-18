@@ -36,6 +36,7 @@ export class AuthenticationService {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('users');
+    localStorage.removeItem('user_role');
   }
 
   public saveToken(token: string | null) {
@@ -47,6 +48,7 @@ export class AuthenticationService {
 
   public addUserToLocalCache(person: Person | null) {
     localStorage.setItem('user', JSON.stringify(person));
+    localStorage.setItem('user_role', JSON.stringify(person?.role));
   }
 
   public getUserFromLocalCache(): Person | null {
@@ -55,6 +57,10 @@ export class AuthenticationService {
       return JSON.parse(tempPerson);
     }
     return null;
+  }
+
+  public getUserRoleFromLocalCache(): string | null {
+    return localStorage.getItem('user_role');
   }
 
   public loadToken(): void {

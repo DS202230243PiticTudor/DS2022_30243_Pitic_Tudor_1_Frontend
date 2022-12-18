@@ -4,6 +4,9 @@ import {DeviceDetail, DeviceTableService} from "../device-table/device-table.ser
 import {ActivatedRoute, Router} from "@angular/router";
 import {PersonDetailsService} from "../person-details.service";
 import {MatDialog} from "@angular/material/dialog";
+import {MeasurementDTO} from "../../../models/measurementDTO.model";
+import * as echarts from 'echarts';
+import {EChartsOption} from "echarts";
 
 @Component({
   selector: 'app-statistics',
@@ -13,7 +16,11 @@ import {MatDialog} from "@angular/material/dialog";
 export class StatisticsComponent implements OnInit {
   person?: PersonDetail;
   dataSource: DeviceDetail[] = [];
-  currentCalculation: number = 0;
+  measurements: MeasurementDTO[] = [];
+  dates: any[] = [];
+  totalReadings: number[] = [];
+
+  option: any;
 
   constructor(
     private router: Router,
@@ -21,7 +28,7 @@ export class StatisticsComponent implements OnInit {
     private deviceTableService: DeviceTableService,
     private personDetailsService: PersonDetailsService,
     private dialog: MatDialog,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.parent?.paramMap.subscribe(
@@ -32,7 +39,66 @@ export class StatisticsComponent implements OnInit {
           data => {
             this.person = data;
             this.getAllDevices(this.person.id);
+            this.getMeasurements(this.person.id);
           });
+      });
+    this.option = {
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "cross"
+        }
+      },
+      grid: {
+        left: "3%",
+        right: "4%",
+        bottom: "8%",
+        top: "3%",
+        containLabel: true
+      },
+      yAxis: {
+        type: "value"
+      },
+      xAxis: {
+        type: "category",
+        data: this.dates,
+        boundaryGap: false,
+        axisLabel: {
+          interval: 0,
+          rotate: 15
+        }
+      },
+      series: [
+        {
+          name: "total consumption",
+          type: "line",
+          data: this.totalReadings,
+          areaStyle:{}
+        }
+      ]
+    };
+  }
+
+  makeMeasurement() {
+    this.personDetailsService.makeMeasurements(this.person!.id).subscribe();
+    this.getMeasurements(this.person!.id);
+    this.option.series[0].data = this.totalReadings;
+  }
+
+  getMeasurements(personId: string) {
+    this.personDetailsService.getMeasurements(personId).subscribe(
+      (res: MeasurementDTO[]) => {
+        for (let m of res) {
+          this.measurements.push(m);
+          this.dates.push(
+            new Date(m.createdDate)
+            .toLocaleDateString(
+              undefined,
+              {day: 'numeric', month: 'numeric', year: 'numeric'}
+            )
+          );
+          this.totalReadings.push(m.totalMeasurement);
+        }
       });
   }
 
@@ -43,15 +109,4 @@ export class StatisticsComponent implements OnInit {
       });
   }
 
-  calculateConsumption() {
-    let sum = 0
-    for (let device of this.dataSource) {
-      sum += this.getRandomFloat(device.maxEnergyConsumption)
-    }
-    this.currentCalculation = sum;
-  }
-
-  getRandomFloat(max: number): number {
-    return Math.random() * max;
-  }
 }

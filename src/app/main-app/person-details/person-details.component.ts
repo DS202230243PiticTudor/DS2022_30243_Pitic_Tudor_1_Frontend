@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NotificationService} from "../../service/notification.service";
 import {PersonDetailsService} from "./person-details.service";
 import {PersonDetail} from "../person-table/person-table.service";
+import {AuthenticationService} from "../../service/authentication.service";
 
 @Component({
   selector: 'app-person-details',
@@ -12,15 +13,16 @@ import {PersonDetail} from "../person-table/person-table.service";
 export class PersonDetailsComponent implements OnInit {
   btnDevicesStyle: string = 'toolbar-buttons-default';
   btnStatsStyle: string = 'toolbar-buttons-default';
-
   person?: PersonDetail;
   personFound?: boolean;
+  showBackButton: boolean = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private notificationService: NotificationService,
     private personDetailsService: PersonDetailsService,
+    private authenticationService: AuthenticationService,
   ) { }
 
   ngOnInit(): void {
@@ -36,8 +38,12 @@ export class PersonDetailsComponent implements OnInit {
       res => this.handleSuccess(res),
       error => this.handleError()
     );
+    let userRole = <string>this.authenticationService.getUserRoleFromLocalCache();
+    let comparedRole = '\"ROLE_SUPER_ADMIN\"';
+    console.log(userRole);
+    console.log(userRole == comparedRole);
+    this.showBackButton = userRole == comparedRole;
   }
-
 
   handleSuccess(person: any) {
     this.person = person;

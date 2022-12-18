@@ -5,6 +5,7 @@ import {PersonTableComponent} from "./person-table/person-table.component";
 import {PersonDetailsComponent} from "./person-details/person-details.component";
 import {DeviceTableComponent} from "./person-details/device-table/device-table.component";
 import {StatisticsComponent} from "./person-details/statistics/statistics.component";
+import {RoleGuard} from "../guard/role.guard";
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: 'persons', component: PersonTableComponent,
+        canActivate: [RoleGuard]
       },
       {
         path: 'persons/:id', component: PersonDetailsComponent, children: [

@@ -16,6 +16,7 @@ export const environment = {
     devicesUpdate: "devices/update",
     devicesPerson: "devices/person/",
     resetPassword: "person/resetpassword/",
+    measurement: "persons/measure/",
   },
 };
 

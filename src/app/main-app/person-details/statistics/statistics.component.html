@@ -1,10 +1,9 @@
 <div class="content-wrapper">
   <div class="content-container">
     <div class="buttons-container">
-      <button mat-raised-button class="mat-primary add-device-button" (click)="calculateConsumption()">Calculate Consumption</button>
+      <button mat-raised-button class="mat-primary add-device-button" (click)="makeMeasurement()">Make Measurement</button>
     </div>
-    <div>
-      Current consumption: {{this.currentCalculation | number:'1.2-2'}}
-    </div>
+    <h1>Make a measurement</h1>
+    <div *ngIf="this.measurements.length !== 0" echarts [options]="option"></div>
   </div>
 </div>
