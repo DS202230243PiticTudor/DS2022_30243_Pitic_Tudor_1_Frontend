@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: "http://localhost:8080/api/",
+  websocketURL: "ws://localhost:8080/api/",
   apiEndpoints: {
     login: "login/",
     persons: "persons/",
@@ -17,6 +18,7 @@ export const environment = {
     devicesPerson: "devices/person/",
     resetPassword: "person/resetpassword/",
     measurement: "persons/measure/",
+    websocket: "ws/"
   },
 };
 

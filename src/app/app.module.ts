@@ -23,6 +23,7 @@ import {NotificationModule} from "./notification/notification.module";
 import { RegisterComponent } from './register/register.component';
 import {MatSelectModule} from "@angular/material/select";
 import {AvatarModule} from "ngx-avatar";
+import {WebSocketService} from "./service/web-socket.service";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import {AvatarModule} from "ngx-avatar";
   providers: [
     authInterceptorProvider,
     AuthenticationService,
+    WebSocketService,
     AuthenticationGuard,
     AppRoutingModule
   ],
