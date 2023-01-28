@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+@use "./styles/themes/light";
+@use "./styles/typography/config" as typography;
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@include mat.core();
+
+@include mat.all-component-themes(light.$she-light-theme);
+@include mat.all-component-typographies(typography.$she-typography);
+
+html, body {
+  height: 100%;
+  background-color: #f0f2f4;
+}
+
+body { margin: 0; }

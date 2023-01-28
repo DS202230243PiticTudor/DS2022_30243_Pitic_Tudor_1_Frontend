@@ -6,6 +6,7 @@ import {PersonDetailsComponent} from "./person-details/person-details.component"
 import {DeviceTableComponent} from "./person-details/device-table/device-table.component";
 import {StatisticsComponent} from "./person-details/statistics/statistics.component";
 import {RoleGuard} from "../guard/role.guard";
+import {ChatComponent} from "./person-details/chat/chat.component";
 
 const routes: Routes = [
   {
@@ -22,6 +23,9 @@ const routes: Routes = [
             path: '',
             redirectTo: 'device-table',
             pathMatch: 'full'
+          },
+          {
+            path: 'chat', component: ChatComponent,
           },
           {
             path: 'device-table', component: DeviceTableComponent,

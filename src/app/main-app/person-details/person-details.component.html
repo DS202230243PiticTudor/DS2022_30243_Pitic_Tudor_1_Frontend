@@ -8,6 +8,7 @@
         <span class="elements" *ngIf="person != undefined">{{this.person.firstName}} {{this.person.lastName}}</span>
       </div>
       <div class="details-right-elements">
+        <button *ngIf="this.checkIfOnPersonOwnPage()" mat-button [class]="btnChatStyle" (click)="onClickChatButton()">Chat</button>
         <button mat-button [class]="btnDevicesStyle" (click)="onClickDevicesButton()">Devices</button>
         <button mat-button [class]="btnStatsStyle" (click)="onClickStatsButton()">Stats</button>
       </div>

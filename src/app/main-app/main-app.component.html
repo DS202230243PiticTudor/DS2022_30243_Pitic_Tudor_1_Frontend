@@ -3,7 +3,10 @@
     Energy Management App
     <div class="right-elements">
       <button class="right-element" mat-flat-button color="primary" (click)="logout()">Logout</button>
-      <span class="avatar">{{getAvatarInitials()}}</span>
+      <span class="avatar" [style.background]="'linear-gradient(' + this.angleOfGradient(this.username) +'deg , '
+      + this.avatarColor + ' 0%, ' + this.invertHexColor(this.avatarColor) + ' 100%)'">
+        {{getAvatarInitials()}}
+      </span>
     </div>
   </div>
 </mat-toolbar>

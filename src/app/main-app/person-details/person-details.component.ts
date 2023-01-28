@@ -18,6 +18,7 @@ import {Frame} from "stompjs";
 export class PersonDetailsComponent implements OnInit, OnDestroy {
   btnDevicesStyle: string = 'toolbar-buttons-default';
   btnStatsStyle: string = 'toolbar-buttons-default';
+  btnChatStyle: string = 'toolbar-buttons-default';
   person?: PersonDetail;
   personFound?: boolean;
   showBackButton: boolean = false;
@@ -94,14 +95,23 @@ export class PersonDetailsComponent implements OnInit, OnDestroy {
   }
 
   onClickDevicesButton() {
+    this.btnChatStyle = "toolbar-buttons-default";
     this.btnDevicesStyle = "toolbar-buttons-selected";
     this.btnStatsStyle = "toolbar-buttons-default";
     this.router.navigate(['device-table'], {relativeTo: this.route});
   }
 
   onClickStatsButton() {
+    this.btnChatStyle = "toolbar-buttons-default";
     this.btnDevicesStyle = "toolbar-buttons-default";
     this.btnStatsStyle = "toolbar-buttons-selected";
     this.router.navigate(['statistics'], {relativeTo: this.route});
+  }
+
+  onClickChatButton() {
+    this.btnChatStyle = "toolbar-buttons-selected";
+    this.btnDevicesStyle = "toolbar-buttons-default";
+    this.btnStatsStyle = "toolbar-buttons-default";
+    this.router.navigate(['chat'], {relativeTo: this.route});
   }
 }

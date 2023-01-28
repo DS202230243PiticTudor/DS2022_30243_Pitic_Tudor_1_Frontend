@@ -16,6 +16,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     StatisticsComponent,
     DeleteDeviceComponent,
     AddDeviceCardComponent,
-    UpdateDeviceCardComponent
+    UpdateDeviceCardComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,

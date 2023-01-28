@@ -1,0 +1,171 @@
+@use '@angular/material' as mat;
+@use "../typography/config" as tp;
+@use "sass:map";
+
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+$she-primary-palette: (
+  50: #E9EFF7,
+  100: #CBDAF0,
+  200: #AABFDF,
+  300: #839DC3,
+  400: #5C7AA3,
+  500: #405F8C,
+  600: #314D77,
+  700: #294166,
+  800: #213555,
+  900: #021A41,
+  contrast: (
+    50: #36393e,
+    100: #36393e,
+    200: #36393e,
+    300: #36393e,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$she-secondary-palette: (
+  50: #fcf1e8,
+  100: #fdd5bd,
+  200: #F9B695,
+  300: #F7936C,
+  400: #F5724F,
+  500: #F55A33,
+  600: #EA542F,
+  700: #DC4E2A,
+  800: #CA3221,
+  900: #BA1000,
+  contrast: (
+    50: #36393e,
+    100: #36393e,
+    200: #36393e,
+    300: #36393e,
+    400: #36393e,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$she-success-palette: (
+  50: #F4FAE6,
+  100: #E4F2C1,
+  200: #D1EA97,
+  300: #BCE16A,
+  400: #ABDA42,
+  500: #9BD300,
+  600: #8AC300,
+  700: #72AE00,
+  800: #5B9B00,
+  900: #2C7900,
+  contrast: (
+    50: #36393e,
+    100: #36393e,
+    200: #36393e,
+    300: #36393e,
+    400: #36393e,
+    500: #36393e,
+    600: #36393e,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$she-warning-palette: (
+  50: #FFFDE5,
+  100: #FFFABF,
+  200: #FEF694,
+  300: #FDF166,
+  400: #FBED3C,
+  500: #FFEC00,
+  600: #FFDA00,
+  700: #FFC100,
+  800: #FFA800,
+  900: #FF7B00,
+  contrast: (
+    50: #36393e,
+    100: #36393e,
+    200: #36393e,
+    300: #36393e,
+    400: #36393e,
+    500: #36393e,
+    600: #36393e,
+    700: #36393e,
+    800: #36393e,
+    900: white,
+  )
+);
+
+$she-alert-palette: (
+  50: #FFF2F4,
+  100: #FFD9DE,
+  200: #FFA6AD,
+  300: #FF8084,
+  400: #FF6666,
+  500: #FA3F3F,
+  600: #E62E2E,
+  700: #C70000,
+  800: #AD0000,
+  900: #940000,
+  contrast: (
+    50: #36393e,
+    100: #36393e,
+    200: #36393e,
+    300: #36393e,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$she-neutral-palette: (
+  50: #F6F8F8,
+  100: #DEE5E8,
+  200: #BDC7CC,
+  300: #9DA9AE,
+  400: #818D92,
+  500: #6A767C,
+  600: #5A666C,
+  700: #3E4654,
+  800: #383D42,
+  900: #2F3032,
+  contrast: (
+    50: #36393e,
+    100: #36393e,
+    200: #36393e,
+    300: #36393e,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$she-neutral: mat.define-palette($she-neutral-palette, 800);
+$she-primary: mat.define-palette($she-primary-palette, 800);
+$she-secondary: mat.define-palette($she-secondary-palette, 700);
+$she-success: mat.define-palette($she-success-palette, 500);
+$she-warning: mat.define-palette($she-warning-palette, 500);
+$she-alert: mat.define-palette($she-alert-palette, 500);
+
+$she-light-theme: mat.define-light-theme((
+  color: (
+    primary: $she-primary,
+    accent: $she-secondary,
+    warn: $she-alert,
+  )
+));

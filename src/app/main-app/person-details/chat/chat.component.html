@@ -1,0 +1,68 @@
+<div class="content-wrapper">
+  <div class="chat-box-wrapper">
+    <div class="sidebar-section">
+      <div *ngFor="let person of this.dataSource" class="profile-div" (click)="this.onProfileCLick(person)">
+        <div class="profile-image-container">
+          <span class="profile-image" [style.background]="'linear-gradient(' + this.angleOfGradient(person.username) +'deg , '
+          + person.avatarColor + ' 0%, ' + this.invertHexColor(person.avatarColor) + ' 100%)'">
+            {{this.getAvatarInitials(person)}}
+          </span>
+        </div>
+        <div class="profile-details">
+          <span style="color: #3E4654; font-size: large">{{person.firstName}} {{person.lastName}}</span>
+          <p style="color: #ababab;">@{{person.username}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="chat-area" *ngIf="selectedPerson != null">
+      <div class="chat-area-header">
+        <div class="profile-image-container">
+          <span class="profile-image" [style.background]="'linear-gradient(' + this.angleOfGradient(this.selectedPerson.username) +'deg , '
+            + this.selectedPerson.avatarColor + ' 0%, ' + this.invertHexColor(this.selectedPerson.avatarColor) + ' 100%)'">
+            {{this.getAvatarInitials(this.selectedPerson)}}
+          </span>
+        </div>
+        <div class="chat-area-header-details">
+          <span style="color: #3E4654; font-size: x-large; font-weight: bold;">{{this.selectedPerson.firstName}} {{this.selectedPerson.lastName}}</span>
+          <p style="color: #ababab;">@{{this.selectedPerson.username}}</p>
+        </div>
+      </div>
+      <div class="chat-area-messaging">
+        <div class="chat-message-received-container">
+          <div class="chat-message-received-bubble">
+            <p>chat message 1</p>
+          </div>
+        </div>
+        <div class="chat-message-received-container">
+          <div class="chat-message-received-bubble">
+            <p>chat message 2</p>
+          </div>
+        </div>
+        <div class="chat-message-received-container">
+          <div class="chat-message-received-bubble">
+            <p>chat message 3</p>
+          </div>
+        </div>
+        <div class="chat-message-sent-container">
+          <div class="chat-message-sent-bubble">
+            <p>This is a sent message</p>
+          </div>
+        </div>
+        <div class="chat-message-sent-container">
+          <div class="chat-message-sent-bubble">
+            <p>test</p>
+          </div>
+        </div>
+      </div>
+      <div class="chat-area-footer">
+        <input type="text" class="write-message" placeholder="Type your message here">
+        <button mat-icon-button mat-stroked-button class="send-button" color="primary">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="chat-area-empty" *ngIf="selectedPerson === null">
+      <span>Start a conversation</span>
+    </div>
+  </div>
+</div>

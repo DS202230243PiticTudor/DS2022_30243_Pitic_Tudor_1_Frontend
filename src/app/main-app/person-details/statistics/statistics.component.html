@@ -4,6 +4,6 @@
       <button mat-raised-button class="mat-primary add-device-button" (click)="makeMeasurement()">Make Measurement</button>
     </div>
     <h1>Make a measurement</h1>
-    <div *ngIf="this.measurements.length !== 0" echarts [options]="option"></div>
+    <div *ngIf="this.measurements.length !== 0" echarts id="chart" [options]="this.option" [loading]="true"></div>
   </div>
 </div>

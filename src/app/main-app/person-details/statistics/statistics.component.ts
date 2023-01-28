@@ -3,11 +3,7 @@ import {PersonDetail} from "../../person-table/person-table.service";
 import {DeviceDetail, DeviceTableService} from "../device-table/device-table.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PersonDetailsService} from "../person-details.service";
-import {MatDialog} from "@angular/material/dialog";
 import {MeasurementDTO} from "../../../models/measurementDTO.model";
-import * as echarts from 'echarts';
-import {EChartsOption} from "echarts";
-
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -19,6 +15,7 @@ export class StatisticsComponent implements OnInit {
   measurements: MeasurementDTO[] = [];
   dates: any[] = [];
   totalReadings: number[] = [];
+  measurementsChart: any;
 
   option: any;
 
@@ -27,7 +24,6 @@ export class StatisticsComponent implements OnInit {
     private route: ActivatedRoute,
     private deviceTableService: DeviceTableService,
     private personDetailsService: PersonDetailsService,
-    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -77,12 +73,19 @@ export class StatisticsComponent implements OnInit {
         }
       ]
     };
+    // if(this.measurements.length !== 0) {
+    //   // @ts-ignore
+    //   this.measurementsChart = echarts.init(document.getElementById('chart'))
+    //   this.measurementsChart.setOption(this.option);
+    // }
   }
 
   makeMeasurement() {
-    this.personDetailsService.makeMeasurements(this.person!.id).subscribe();
-    this.getMeasurements(this.person!.id);
-    this.option.series[0].data = this.totalReadings;
+    this.personDetailsService.makeMeasurements(this.person!.id).subscribe((res) => {
+      console.log(res);
+      console.log(this.totalReadings);
+      this.getMeasurements(this.person!.id);
+    });
   }
 
   getMeasurements(personId: string) {
@@ -91,14 +94,14 @@ export class StatisticsComponent implements OnInit {
         for (let m of res) {
           this.measurements.push(m);
           this.dates.push(
-            new Date(m.createdDate)
-            .toLocaleDateString(
-              undefined,
-              {day: 'numeric', month: 'numeric', year: 'numeric'}
+            new Date(m.createdDate).toLocaleDateString(
+              undefined, {day: 'numeric', month: 'numeric', year: 'numeric'}
             )
           );
           this.totalReadings.push(m.totalMeasurement);
         }
+        this.option.series[0].data = this.totalReadings;
+        console.log(this.totalReadings);
       });
   }
 
@@ -108,5 +111,4 @@ export class StatisticsComponent implements OnInit {
         this.dataSource = res;
       });
   }
-
 }

@@ -11,6 +11,7 @@ export interface PersonDetail {
   lastName: string;
   username: string;
   email: string;
+  avatarColor: string;
   role: string;
   active: boolean;
   notLocked: boolean;
