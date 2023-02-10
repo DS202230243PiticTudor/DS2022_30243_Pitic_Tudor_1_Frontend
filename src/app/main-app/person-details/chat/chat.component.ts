@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PersonDetail, PersonTableService} from "../../person-table/person-table.service";
 import {Person} from "../../../models/person.model";
 
@@ -10,17 +10,6 @@ import {Person} from "../../../models/person.model";
 export class ChatComponent implements OnInit {
   dataSource: PersonDetail[] = [];
   selectedPerson: PersonDetail | null = null;
-  //   {
-  //   id: 'random',
-  //   firstName: 'Test',
-  //   lastName: 'Name',
-  //   username: 'test',
-  //   email: 'string',
-  //   avatarColor: '#cb1414',
-  //   role: 'string',
-  //   active: true,
-  //   notLocked: true
-  // }
   constructor(
     private personTableService: PersonTableService
   ) { }
@@ -66,7 +55,7 @@ export class ChatComponent implements OnInit {
 
   angleOfGradient(username: string): number {
     let sum = 0;
-    for(let i = 0; i < username.length; i++) {
+    for (let i = 0; i < username.length; i++) {
       sum += username.charCodeAt(i);
     }
     return sum % 360;

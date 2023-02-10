@@ -58,7 +58,7 @@ export class DeviceTableComponent implements OnInit {
   openDeleteDeviceDialog(id: string) {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.data = { id };
+    dialogConfig.data = {id};
     dialogConfig.autoFocus = false;
     const dialogRef = this.dialog.open(DeleteDeviceComponent, dialogConfig);
 
@@ -99,7 +99,7 @@ export class DeviceTableComponent implements OnInit {
     dialogConfig.height = '90%';
     dialogConfig.autoFocus = false;
     dialogConfig.disableClose = false;
-    const dialogRef = this.dialog.open(UpdateDeviceCardComponent, dialogConfig )
+    const dialogRef = this.dialog.open(UpdateDeviceCardComponent, dialogConfig)
     dialogRef.afterClosed().subscribe(
       status => {
         if (status) {
