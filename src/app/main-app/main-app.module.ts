@@ -23,6 +23,7 @@ import { EditPersonCardComponent } from './edit-person-card/edit-person-card.com
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {PersonDetailsModule} from "./person-details/person-details.module";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -33,23 +34,24 @@ import {PersonDetailsModule} from "./person-details/person-details.module";
     EditPersonCardComponent,
     PersonDetailsComponent
   ],
-  imports: [
-    CommonModule,
-    MainAppRoutingModule,
-    MatDialogModule,
-    MatButtonModule,
-    NotificationModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatToolbarModule,
-    PersonDetailsModule
-  ],
+    imports: [
+        CommonModule,
+        MainAppRoutingModule,
+        MatDialogModule,
+        MatButtonModule,
+        NotificationModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatToolbarModule,
+        PersonDetailsModule,
+        MatCardModule
+    ],
   providers: [
     authInterceptorProvider,
     AuthenticationService,

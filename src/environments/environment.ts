@@ -9,6 +9,7 @@ export const environment = {
   apiEndpoints: {
     login: "login/",
     persons: "persons/",
+    personsWithException: "persons/except/",
     personsCreate: "persons/create/",
     personsUpdate: "persons/update/",
     register: "persons/register/",

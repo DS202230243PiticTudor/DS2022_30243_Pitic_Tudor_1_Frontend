@@ -19,6 +19,18 @@
   max-height: 89%;
 }
 
+.person-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  height: 100%;
+  max-height: 89%;
+}
+
+.person-card {
+  margin: 10px;
+}
+
 .mat-table {
   min-width: 100%;
 }
@@ -70,4 +82,8 @@
   justify-content: right;
   margin-right: 1%;
   margin-bottom: 30px;
+}
+
+.custom-dialog-container .mat-dialog-container {
+  margin: 0;
 }

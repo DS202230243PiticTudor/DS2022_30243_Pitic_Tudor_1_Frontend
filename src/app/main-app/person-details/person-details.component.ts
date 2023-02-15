@@ -112,6 +112,6 @@ export class PersonDetailsComponent implements OnInit, OnDestroy {
     this.btnChatStyle = "toolbar-buttons-selected";
     this.btnDevicesStyle = "toolbar-buttons-default";
     this.btnStatsStyle = "toolbar-buttons-default";
-    this.router.navigate(['chat'], {relativeTo: this.route});
+    this.router.navigate(['chat'], {relativeTo: this.route, state: {personId: this.personId}});
   }
 }

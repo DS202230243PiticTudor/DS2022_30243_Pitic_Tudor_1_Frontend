@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PersonDetail, PersonTableService} from "../../person-table/person-table.service";
 import {Person} from "../../../models/person.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-chat',
@@ -10,16 +11,23 @@ import {Person} from "../../../models/person.model";
 export class ChatComponent implements OnInit {
   dataSource: PersonDetail[] = [];
   selectedPerson: PersonDetail | null = null;
+  personId: string = '';
   constructor(
-    private personTableService: PersonTableService
-  ) { }
+    private personTableService: PersonTableService,
+    private router: Router
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation!.extras.state as { personId: any };
+    this.personId = state.personId;
+  }
 
   ngOnInit(): void {
-    this.getAllPersons()
+    this.getAllPersons();
   }
 
   getAllPersons() {
-    this.personTableService.getPersons().subscribe(persons => {
+
+    this.personTableService.getPersonsExceptWithId(this.personId).subscribe(persons => {
       this.dataSource = persons;
     });
   }

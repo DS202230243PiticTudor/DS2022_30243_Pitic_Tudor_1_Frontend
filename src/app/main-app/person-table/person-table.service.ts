@@ -24,6 +24,7 @@ export class PersonTableService {
 
   url = environment.apiUrl;
   persons = environment.apiEndpoints.persons;
+  personsWithException = environment.apiEndpoints.personsWithException;
   personsCreate = environment.apiEndpoints.personsCreate;
   personsUpdate = environment.apiEndpoints.personsUpdate;
   constructor(private http: HttpClient) { }
@@ -34,6 +35,10 @@ export class PersonTableService {
 
   getPersons(): Observable<PersonDetail[]>{
     return this.http.get<PersonDetail[]>(this.url + this.persons);
+  }
+
+  getPersonsExceptWithId(id: string): Observable<PersonDetail[]> {
+    return this.http.get<PersonDetail[]>(this.url + this.personsWithException + id);
   }
 
   deletePerson(id: string): Observable<null> {

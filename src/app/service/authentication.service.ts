@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserLogin} from "../models/userLogin.model";
 import {Person} from "../models/person.model";
@@ -26,8 +26,7 @@ export class AuthenticationService {
   }
 
   public register(registerDTO: UserRegister): Observable<string> {
-    return this.http.post<string>
-    (this.host + this.registerEndpoint, registerDTO);
+    return this.http.post<string>(this.host + this.registerEndpoint, registerDTO);
   }
 
   public logout(): void {

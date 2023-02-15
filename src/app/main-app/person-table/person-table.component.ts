@@ -1,7 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PersonDetail, PersonTableService} from "./person-table.service";
 import {Router} from "@angular/router";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {DeletePersonComponent} from "./delete-person/delete-person.component";
 import {AddPersonCardComponent} from "../add-person-card/add-person-card.component";
 import {EditPersonCardComponent} from "../edit-person-card/edit-person-card.component";
@@ -91,9 +91,10 @@ export class PersonTableComponent implements OnInit {
       element
     };
     dialogConfig.width = '550px'
-    dialogConfig.height = '90%'
+    dialogConfig.height = '93%'
     dialogConfig.autoFocus = false
     dialogConfig.disableClose = false;
+    dialogConfig.panelClass = 'custom-dialog-container'
     const dialogRef = this.dialog.open(EditPersonCardComponent, dialogConfig )
     dialogRef.afterClosed().subscribe(
       status => {
