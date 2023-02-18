@@ -24,6 +24,7 @@ import { RegisterComponent } from './register/register.component';
 import {MatSelectModule} from "@angular/material/select";
 import {AvatarModule} from "ngx-avatar";
 import {WebSocketService} from "./service/web-socket.service";
+import {NotifierModule} from "angular-notifier";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {WebSocketService} from "./service/web-socket.service";
     MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
+    NotifierModule,
     NotificationModule,
     MatSelectModule,
     AvatarModule

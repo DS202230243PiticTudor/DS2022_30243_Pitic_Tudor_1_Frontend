@@ -9,6 +9,7 @@ import {Message} from "../../models/message.model";
 import {NotificationConsumption} from "../../models/notification-consumption.model";
 import {NotificationType} from "../../models/notification-type.enum";
 import {Frame} from "stompjs";
+import {Person} from "../../models/person.model";
 
 @Component({
   selector: 'app-person-details',
@@ -24,7 +25,7 @@ export class PersonDetailsComponent implements OnInit, OnDestroy {
   showBackButton: boolean = false;
   stompClient: any;
   personId;
-  user: any;
+  user: Person;
 
   constructor(
     private router: Router,
@@ -34,7 +35,7 @@ export class PersonDetailsComponent implements OnInit, OnDestroy {
     private authenticationService: AuthenticationService,
     private webSocketService: WebSocketService,
   ) {
-    this.user = this.authenticationService.getUserFromLocalCache();
+    this.user = <Person>this.authenticationService.getUserFromLocalCache();
   }
 
   ngOnInit(): void {
@@ -68,6 +69,7 @@ export class PersonDetailsComponent implements OnInit, OnDestroy {
         });
         this.stompClient.send('/ws/private-message-notification', {}, JSON.stringify(message));
       });
+      console.log(this.stompClient)
     }
   }
 

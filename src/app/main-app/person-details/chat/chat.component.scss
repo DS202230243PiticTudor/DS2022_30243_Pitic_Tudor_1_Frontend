@@ -1,3 +1,7 @@
+//* {
+//  background-color: rgb(37, 186, 0, 0.05);
+//}
+
 p {
   margin: 0;
 }
@@ -27,7 +31,7 @@ p {
   padding: 5px;
   margin-left: 2px;
   //margin-right: 2px;
-  height: 4.5rem;
+  min-height: 4.5rem;
   display: flex;
   flex-direction: row;
   border-bottom: 2px solid;
@@ -38,6 +42,17 @@ p {
   background-color: #eceef8;
   //transition: 0.1s;
   cursor: pointer;
+}
+
+.new-message-notification-bubble {
+  width: fit-content;
+  float: right;
+  background-color: rgb(4, 147, 4);
+  color: white;
+  border-radius: 25px;
+  padding-left: 7px;
+  padding-right: 7px;
+  font-size: x-small;
 }
 
 .profile-image-container {
@@ -104,9 +119,10 @@ p {
 
 .chat-area-messaging {
   grid-area: message-area;
-  overflow: auto;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
+  padding-bottom: 10px;
 }
 
 .chat-message-received-container {
@@ -122,6 +138,7 @@ p {
   border-radius: 10px;
   margin-top: 5px;
   margin-left: 10px;
+  margin-right: 10px;
   padding: 10px;
 }
 
@@ -138,7 +155,13 @@ p {
   border-radius: 10px;
   margin-top: 5px;
   margin-right: 10px;
+  margin-left: 10px;
   padding: 10px;
+}
+
+.sent-icon {
+  color: #0be11d;
+  font-size: medium;
 }
 
 .chat-area-footer {
@@ -155,6 +178,11 @@ p {
   margin: 5px 20px;
   width: 100%;
   padding: 10px;
+}
+
+form {
+  display: flex;
+  width: 100%;
 }
 
 .send-button {

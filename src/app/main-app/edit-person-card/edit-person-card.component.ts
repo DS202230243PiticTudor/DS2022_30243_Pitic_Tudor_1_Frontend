@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PersonDetail, PersonTableService} from "../person-table/person-table.service";
+import {PersonTableService} from "../person-table/person-table.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Router} from "@angular/router";
 import {NotificationService} from "../../service/notification.service";
 import {UserUpdate} from "../../models/userUpdate.model";
 import {NotificationType} from "../../models/notification-type.enum";
@@ -63,7 +62,7 @@ export class EditPersonCardComponent implements OnInit {
     this.userUpdate = this.form.value;
     console.log(this.userUpdate)
     this.personTableService.updatePerson(this.userUpdate).subscribe(
-      (response: PersonDetail) => {
+      () => {
         this.sendNotification(NotificationType.SUCCESS, "User Updated");
         this.dialogRef.close(true);
       },

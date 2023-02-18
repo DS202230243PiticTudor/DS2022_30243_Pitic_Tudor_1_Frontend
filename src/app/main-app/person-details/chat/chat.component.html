@@ -11,6 +11,9 @@
         <div class="profile-details">
           <span style="color: #3E4654; font-size: large">{{person.firstName}} {{person.lastName}}</span>
           <p style="color: #ababab;">@{{person.username}}</p>
+<!--          <div class="new-message-notification-bubble">-->
+<!--            <p>New message</p>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -27,38 +30,27 @@
           <p style="color: #ababab;">@{{this.selectedPerson.username}}</p>
         </div>
       </div>
-      <div class="chat-area-messaging">
-        <div class="chat-message-received-container">
-          <div class="chat-message-received-bubble">
-            <p>chat message 1</p>
-          </div>
-        </div>
-        <div class="chat-message-received-container">
-          <div class="chat-message-received-bubble">
-            <p>chat message 2</p>
-          </div>
-        </div>
-        <div class="chat-message-received-container">
-          <div class="chat-message-received-bubble">
-            <p>chat message 3</p>
-          </div>
-        </div>
-        <div class="chat-message-sent-container">
-          <div class="chat-message-sent-bubble">
-            <p>This is a sent message</p>
-          </div>
-        </div>
-        <div class="chat-message-sent-container">
-          <div class="chat-message-sent-bubble">
-            <p>test</p>
+      <div class="chat-area-messaging" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <div [ngClass]="{
+        'chat-message-received-container': !this.checkIfOwnMessage(message),
+        'chat-message-sent-container': this.checkIfOwnMessage(message)}" *ngFor="let message of this.messages">
+          <mat-icon *ngIf="this.checkIfOwnMessage(message) && this.checkIfLastMessage(message)" class="sent-icon">
+            done_all
+          </mat-icon>
+          <div [ngClass]="{
+          'chat-message-sent-bubble': this.checkIfOwnMessage(message),
+           'chat-message-received-bubble': !this.checkIfOwnMessage(message)}">
+            <p>{{message.content}}</p>
           </div>
         </div>
       </div>
       <div class="chat-area-footer">
-        <input type="text" class="write-message" placeholder="Type your message here">
-        <button mat-icon-button mat-stroked-button class="send-button" color="primary">
-          <mat-icon>send</mat-icon>
-        </button>
+        <form [formGroup]="form" (ngSubmit)="this.sendMessage()">
+          <input type="text" class="write-message" placeholder="Type your message here" formControlName="content">
+          <button mat-icon-button mat-stroked-button class="send-button" color="primary">
+            <mat-icon>send</mat-icon>
+          </button>
+        </form>
       </div>
     </div>
     <div class="chat-area-empty" *ngIf="selectedPerson === null">

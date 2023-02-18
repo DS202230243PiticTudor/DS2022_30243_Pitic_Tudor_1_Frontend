@@ -12,6 +12,8 @@ export const environment = {
     personsWithException: "persons/except/",
     personsCreate: "persons/create/",
     personsUpdate: "persons/update/",
+    chat: "chat/",
+    chatConnect: "chat/connect-to-chat",
     register: "persons/register/",
     devices: "devices/",
     devicesCreate: "devices/create",

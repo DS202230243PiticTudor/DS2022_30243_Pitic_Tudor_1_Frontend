@@ -2,6 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {PersonDetail, PersonTableService} from "../../person-table/person-table.service";
 import {Person} from "../../../models/person.model";
 import {Router} from "@angular/router";
+import {ChatService} from "./chat.service";
+import {ChatMessageDTO} from "../../../models/chatMessageDTO.model";
+import {WebSocketService} from "../../../service/web-socket.service";
+import {AuthenticationService} from "../../../service/authentication.service";
+import {Frame} from "stompjs";
+import {FormControl, FormGroup} from "@angular/forms";
+import {ChatMessageSendDTO} from "../../../models/chatMessageSendDTO.model";
 
 @Component({
   selector: 'app-chat',
@@ -11,22 +18,40 @@ import {Router} from "@angular/router";
 export class ChatComponent implements OnInit {
   dataSource: PersonDetail[] = [];
   selectedPerson: PersonDetail | null = null;
+  selectedIndividualChatId: string = '';
   personId: string = '';
+  messages: ChatMessageDTO[] = [];
+  stompClient: any;
+  user: Person;
+  previousSub: any;
+
+  form: FormGroup = new FormGroup({
+    content: new FormControl('')
+  });
   constructor(
+    private router: Router,
     private personTableService: PersonTableService,
-    private router: Router
+    private chatService: ChatService,
+    private authenticationService: AuthenticationService,
+    private webSocketService: WebSocketService,
   ) {
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation!.extras.state as { personId: any };
-    this.personId = state.personId;
+    this.user = <Person>this.authenticationService.getUserFromLocalCache();
+    this.personId = this.user.id;
   }
 
   ngOnInit(): void {
     this.getAllPersons();
+    this.getIndividualChatsIds(this.personId);
+    this.stompClient = this.webSocketService.getStomp();
+    this.stompClient.connect();
   }
 
+  getIndividualChatsIds(personId: string) {
+    this.chatService.getIndividualChatsIds(personId).subscribe(ids => {
+      console.log(ids);
+    });
+  }
   getAllPersons() {
-
     this.personTableService.getPersonsExceptWithId(this.personId).subscribe(persons => {
       this.dataSource = persons;
     });
@@ -70,7 +95,57 @@ export class ChatComponent implements OnInit {
   }
 
   onProfileCLick(person: PersonDetail): void {
+    if(this.previousSub !== undefined) {
+      this.previousSub.unsubscribe();
+    }
     this.selectedPerson = person;
+    this.chatService.connectToUser(this.personId, person.id).subscribe(messages => {
+      this.messages = messages;
+      this.selectedIndividualChatId = this.messages[0].individualChatId;
+      // call endpoint, mark messages as seen
+      if(this.messages.length === 0) {
+        console.log("No messages");
+      }
+    });
     console.log("Clicked on: @" + person.username)
+    this.previousSub = this.stompClient.subscribe('/user/' + this.personId + '/chat', (messageReceive: Frame) => {
+      let messages: ChatMessageDTO[] = JSON.parse(messageReceive.body);
+      let message = messages[0];
+      if(this.checkIfMessageIsFromSelectedPerson(message)) {
+        this.messages.push(message);
+        console.log(messages);
+      } else {
+        console.log("received a message in chat with id: " + message.individualChatId);
+      }
+    });
+    console.log(this.stompClient.subscriptions);
+  }
+
+  checkIfOwnMessage(message: ChatMessageDTO): boolean {
+    return message.recipientId !== this.personId;
+  }
+
+  checkIfLastMessage(message: ChatMessageDTO): boolean {
+    return message === this.messages[this.messages.length - 1];
+  }
+
+  checkIfMessageIsFromSelectedPerson(message: ChatMessageDTO): boolean {
+    return message.individualChatId === this.selectedIndividualChatId;
+  }
+
+  sendMessage() {
+    const message = this.form.value.content;
+    if(message.trim().length !== 0) {
+      let chatMessageSendDTO: ChatMessageSendDTO = {
+        senderId : this.personId,
+        peerId: this.selectedPerson!.id,
+        content: message
+      }
+      console.log(chatMessageSendDTO);
+      this.stompClient.send('/ws/send-message', {}, JSON.stringify(chatMessageSendDTO));
+    } else {
+      console.log("empty message");
+    }
+    this.form.reset();
   }
 }

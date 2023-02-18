@@ -1,14 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserUpdate} from "../../../models/userUpdate.model";
-import {PersonDetail, PersonTableService} from "../../person-table/person-table.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {NotificationService} from "../../../service/notification.service";
 import {NotificationType} from "../../../models/notification-type.enum";
 import {HttpErrorResponse} from "@angular/common/http";
-import {DeviceCreate} from "../../../models/deviceCreate.model";
 import {DeviceUpdate} from "../../../models/deviceUpdate.model";
-import {DeviceDetail, DeviceTableService} from "../device-table/device-table.service";
+import {DeviceTableService} from "../device-table/device-table.service";
 
 @Component({
   selector: 'app-update-device-card',
@@ -50,7 +47,7 @@ export class UpdateDeviceCardComponent implements OnInit {
   updateDevice() {
     this.deviceUpdate = this.form.value;
     this.deviceTableService.updateDevice(this.deviceUpdate).subscribe(
-      (response: DeviceDetail) => {
+      () => {
         this.sendNotification(NotificationType.SUCCESS, "Device Updated");
         this.dialogRef.close(true);
       },
