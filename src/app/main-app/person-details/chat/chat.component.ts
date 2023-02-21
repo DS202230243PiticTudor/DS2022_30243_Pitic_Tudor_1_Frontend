@@ -43,7 +43,13 @@ export class ChatComponent implements OnInit {
     this.getAllPersons();
     this.getIndividualChatsIds(this.personId);
     this.stompClient = this.webSocketService.getStomp();
-    this.stompClient.connect();
+    this.stompClient.connect({}, () => {
+      let url = this.stompClient.ws._transport.url;
+      url = url.replace("ws://localhost:8080/api/our-websocket/", "");
+      url = url.replace("/websocket", "");
+      url = url.replace(/^[0-9]+\//, "");
+      console.log("Your current session is: " + url);
+    });
   }
 
   getIndividualChatsIds(personId: string) {
@@ -107,7 +113,6 @@ export class ChatComponent implements OnInit {
         console.log("No messages");
       }
     });
-    console.log("Clicked on: @" + person.username)
     this.previousSub = this.stompClient.subscribe('/user/' + this.personId + '/chat', (messageReceive: Frame) => {
       let messages: ChatMessageDTO[] = JSON.parse(messageReceive.body);
       let message = messages[0];
@@ -118,6 +123,8 @@ export class ChatComponent implements OnInit {
         console.log("received a message in chat with id: " + message.individualChatId);
       }
     });
+
+    // subscribe to seen stomp
     console.log(this.stompClient.subscriptions);
   }
 

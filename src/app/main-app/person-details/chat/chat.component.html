@@ -34,13 +34,14 @@
         <div [ngClass]="{
         'chat-message-received-container': !this.checkIfOwnMessage(message),
         'chat-message-sent-container': this.checkIfOwnMessage(message)}" *ngFor="let message of this.messages">
-          <mat-icon *ngIf="this.checkIfOwnMessage(message) && this.checkIfLastMessage(message)" class="sent-icon">
-            done_all
-          </mat-icon>
+<!--          <mat-icon *ngIf="this.checkIfOwnMessage(message) && this.checkIfLastMessage(message)" class="sent-icon">-->
+<!--            done_all-->
+<!--          </mat-icon>-->
           <div [ngClass]="{
           'chat-message-sent-bubble': this.checkIfOwnMessage(message),
            'chat-message-received-bubble': !this.checkIfOwnMessage(message)}">
             <p>{{message.content}}</p>
+            <p>seen: {{message.seen}}</p>
           </div>
         </div>
       </div>
